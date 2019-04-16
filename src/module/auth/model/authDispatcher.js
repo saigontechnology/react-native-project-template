@@ -11,7 +11,7 @@ const mapDispatchToAC = {
 
   saveToken: token => ({token}),
 
-  signOut
+  signOut: {}
 };
 
 export default synthesize('auth', mapDispatchToAC);

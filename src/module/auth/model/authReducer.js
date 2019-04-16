@@ -2,10 +2,12 @@
  * Author: Quan Vo
  * Date: 4/16/19
  */
+
 import authDispatcher from "./authDispatcher";
 
 const initialState = {
-  token: null
+  token: null,
+  loading: false
 };
 
 export default authDispatcher(initialState, {

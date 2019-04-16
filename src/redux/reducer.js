@@ -7,6 +7,7 @@ import storage from "redux-persist/lib/storage";
 
 
 const mainReducer = combineReducers({
+  ...screenReducer,
   ...authReducer,
   ...homeReducer,
   ...profileReducer,
