@@ -18,7 +18,7 @@ export const getUserToken = (redirect = true) => {
         [
           {
             text: 'OK', onPress: () => {
-              authDispatcher.signingOut();
+              authDispatcher.signOut();
             }
           }
         ],
@@ -47,12 +47,6 @@ export const sendDeviceInfo = async () => {
 
     const headers = anonymousHeader();
     headers.Authorization = 'Bearer ' + token;
-
-    /*const body = {
-      timezone: DeviceInfo.getTimezone(),
-      platform: Platform.OS,
-      deviceToken
-    };*/
 
     const result = await request({
       url: 'user/deviceToken',

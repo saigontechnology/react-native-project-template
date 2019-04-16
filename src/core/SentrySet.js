@@ -4,24 +4,24 @@
  */
 
 /**
- * EnhancedSet is a data structure that ensure every items are unique, based on an enhancedCriteria function
+ * SentrySet is a data structure that ensure every items are unique, based on an sentryPredicate function
  */
-export default class EnhancedSet<T> {
-  constructor(data: Array<T>, enhancedCriteria: EnhancedCriteria) {
+export default class SentrySet<T> {
+  constructor(data: Array<T>, sentryPredicate: SentryPredicate) {
     this.dataSet = new Set(data);
-    this.enhancedCriteria = enhancedCriteria;
+    this.sentryPredicate = sentryPredicate;
   }
 
   add(newItem) {
     const data = [...this.dataSet];
-    const isExist = data.some(item => !this.enhancedCriteria(item, newItem));
+    const isExist = data.some(item => !this.sentryPredicate(item, newItem));
     if (!isExist)
       this.dataSet.add(newItem);
   }
 
   remove(item) {
     const data = [...this.dataSet];
-    const index = data.findIndex(_item => !this.enhancedCriteria(_item, item));
+    const index = data.findIndex(_item => !this.sentryPredicate(_item, item));
     if (index > -1) {
       const newData = [
         ...data.slice(0, index),
@@ -42,8 +42,8 @@ export default class EnhancedSet<T> {
   }
 
   clone() {
-    return new EnhancedSet([...this.dataSet], this.enhancedCriteria);
+    return new SentrySet([...this.dataSet], this.sentryPredicate);
   }
 }
 
-type EnhancedCriteria = (item: {}, newItem: {}) => boolean
+type SentryPredicate = (item: {}, newItem: {}) => boolean

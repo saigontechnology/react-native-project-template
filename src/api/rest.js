@@ -11,15 +11,17 @@ import {requestSaga} from "./index";
  * @param url: string, required
  * @param params: string, optional
  */
-export function* apiGet(url, params) {
+export function* apiGet(url, params, headers) {
   try {
     const config = {
       url,
-      headers: authHeader()
+      headers: {...authHeader(), ...headers}
     };
-    if (params) config.params = params;
+    if (params)
+      config.params = params;
 
     return yield* requestSaga(config);
+
   } catch (error) {
     console.log("error", error);
     alert(error);
@@ -30,16 +32,18 @@ export function* apiGet(url, params) {
  * @param url: string, required
  * @param params: string, optional
  */
-export function* apiDelete(url, params) {
+export function* apiDelete(url, params, headers) {
   try {
     const config = {
       url,
-      headers: authHeader(),
+      headers: {...authHeader(), ...headers}
       method: "delete",
     };
-    if (params) config.params = params;
+    if (params)
+      config.params = params;
 
     return yield* requestSaga(config);
+
   } catch (error) {
     console.log("error", error);
     alert(error);
@@ -53,7 +57,7 @@ export function* apiDelete(url, params) {
  * @param headers: object, optional
  * @param directResult: boolean, optional
  */
-export function* apiPost(url, body, params, headers, directResult) {
+export function* apiPost(url, body, params, headers) {
   try {
     const config = {
       url,
@@ -64,7 +68,8 @@ export function* apiPost(url, body, params, headers, directResult) {
     if (params)
       config.params = params;
 
-    return yield* requestSaga(config, directResult);
+    return yield* requestSaga(config);
+
   } catch (error) {
     console.log("error", error);
     alert(error);
@@ -85,9 +90,11 @@ export function* apiPut(url, body, params, headers) {
       method: "put",
       data: body
     };
-    if (params) config.params = params;
+    if (params)
+      config.params = params;
 
     return yield* requestSaga(config);
+
   } catch (error) {
     console.log("error", error);
     alert(error);
