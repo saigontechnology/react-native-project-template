@@ -1,8 +1,10 @@
 /**
  * Created by HienPT on 2/25/19.
  */
+
 import React from 'react'
 import Svg, { Rect, Defs, Path, G, Use } from "react-native-svg"
+
 
 export default function({size, color}) {
   return (

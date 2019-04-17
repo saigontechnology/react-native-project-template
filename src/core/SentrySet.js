@@ -4,24 +4,24 @@
  */
 
 /**
- * SentrySet is a data structure that ensure every items are unique, based on an sentryPredicate function
+ * SentrySet is a data structure that ensure every items are unique, based on an isDuplicated function
  */
 export default class SentrySet<T> {
-  constructor(data: Array<T>, sentryPredicate: SentryPredicate) {
+  constructor(data: Array<T>, isDuplicated: SentryPredicate) {
     this.dataSet = new Set(data);
-    this.sentryPredicate = sentryPredicate;
+    this.isDuplicated = isDuplicated;
   }
 
   add(newItem) {
     const data = [...this.dataSet];
-    const isExist = data.some(item => !this.sentryPredicate(item, newItem));
-    if (!isExist)
+    const notExist = data.every(item => !this.isDuplicated(item, newItem));
+    if (notExist)
       this.dataSet.add(newItem);
   }
 
   remove(item) {
     const data = [...this.dataSet];
-    const index = data.findIndex(_item => !this.sentryPredicate(_item, item));
+    const index = data.findIndex(_item => this.isDuplicated(_item, item));
     if (index > -1) {
       const newData = [
         ...data.slice(0, index),
@@ -42,8 +42,8 @@ export default class SentrySet<T> {
   }
 
   clone() {
-    return new SentrySet([...this.dataSet], this.sentryPredicate);
+    return new SentrySet([...this.dataSet], this.isDuplicated);
   }
 }
 
-type SentryPredicate = (item: {}, newItem: {}) => boolean
+type SentryPredicate = (item: {}, newItem: {}) => boolean;

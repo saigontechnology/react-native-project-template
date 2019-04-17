@@ -16,7 +16,7 @@ export default function* authWatcher() {
 
 const authWorker = {
   signIn: function* ({username, password}) {
-    const token = yield* signIn('/api/login', {username, password});
+    const token = yield* signIn(username, password);
     authDispatcher.saveToken(token);
   }
 };

@@ -55,7 +55,6 @@ export function* apiDelete(url, params, headers) {
  * @param body: object, required
  * @param params: string, optional
  * @param headers: object, optional
- * @param directResult: boolean, optional
  */
 export function* apiPost(url, body, params, headers) {
   try {
